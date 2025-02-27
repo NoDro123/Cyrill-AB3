@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-console
-// test 5
+// test 6
 console.log('Hello world!');
 
 const thisIsAnUnsusedVariable = 'Hello world!';
