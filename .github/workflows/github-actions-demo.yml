@@ -1,21 +1,41 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: AB03 - GitHub Actions
+run-name: ${{ github.actor }}
+on: [push, pull_request]
+
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: [self-hosted, linux, x64, cau]
+  Linting:
+    runs-on:
+      labels: [self-hosted, linux, x64, cau]
     steps:
-      - run: echo "installing project"
-      - run: yarn install
-      - run: echo "linting project"
-      - run: yarn lint
-      - run: echo "running tests"
-      - run: yarn test
-      - run: echo "building project"
-      - run: yarn build
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Linting
+        run: npm run lint
+  Testing:
+    runs-on:
+      labels: [self-hosted, linux, x64, cau]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Testing
+        run: npm run test
+  build:
+    runs-on:
+      labels: [self-hosted, linux, x64, cau]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
