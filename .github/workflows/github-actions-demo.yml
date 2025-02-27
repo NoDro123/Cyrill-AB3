@@ -2,7 +2,7 @@ name: AB03 - GitHub Actions
 run-name: ${{ github.actor }}
 on:
   pull_request:
-    types: [opened, synchronize, closed]
+    types: [opened]
     branches:
       - main
       - develop
